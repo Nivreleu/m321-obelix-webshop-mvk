@@ -3,8 +3,9 @@ package ch.bbw.obelix.webshop.controller;
 import java.util.List;
 import java.util.UUID;
 
+import ch.bbw.obelix.quarry.api.MenhirApi;
 import ch.bbw.obelix.webshop.dto.BasketDto;
-import ch.bbw.obelix.webshop.dto.MenhirDto;
+import ch.bbw.obelix.quarry.api.MenhirDto;
 import ch.bbw.obelix.webshop.entity.MenhirEntity;
 import ch.bbw.obelix.webshop.repository.MenhirRepository;
 import ch.bbw.obelix.webshop.service.ObelixWebshopService;
@@ -22,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-public class ObelixWebshopController {
+public class ObelixWebshopController implements  MenhirApi {
 
 	private final ObelixWebshopService obelixWebshopService;
 
@@ -33,7 +34,7 @@ public class ObelixWebshopController {
 		return "Welcome to Obelix's Menhir Shop! The finest menhirs in all of Gaul! Ces Romains sont fous!";
 	}
 
-	@GetMapping("/api/menhirs")
+	@Override
 	public List<MenhirDto> getAllMenhirs() {
 		return menhirRepository.findAll()
 				.stream().map(MenhirEntity::toDto).toList();
