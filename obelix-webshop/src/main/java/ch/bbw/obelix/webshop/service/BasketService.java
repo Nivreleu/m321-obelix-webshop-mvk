@@ -1,6 +1,7 @@
 ﻿package ch.bbw.obelix.webshop.service;
 
 import ch.bbw.obelix.webshop.controller.ObelixWebshopController;
+import ch.bbw.obelix.webshop.controller.QuarryController;
 import ch.bbw.obelix.webshop.dto.BasketDto;
 import ch.bbw.obelix.webshop.dto.DecorativenessDto;
 import ch.bbw.obelix.webshop.entity.MenhirEntity;
@@ -24,7 +25,7 @@ import java.util.*;
 @RequiredArgsConstructor
 public class BasketService {
     @Lazy
-    private final ObelixWebshopController quarryWebclient;
+    private final QuarryController quarryWebclient;
 
     private BasketDto basket;
 
