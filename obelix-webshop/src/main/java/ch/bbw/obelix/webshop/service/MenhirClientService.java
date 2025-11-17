@@ -1,10 +1,10 @@
-﻿package ch.bbw.obelix.webshop.service;
+package ch.bbw.obelix.webshop.service;
 
-import ch.bbw.obelix.quarry.api.MenhirApi;
+import ch.bbw.obelix.quarry.api.QuarryApi;
 
 public class MenhirClientService {
 
-    MenhirApi newWebClient() {
+    QuarryApi newWebClient() {
         return null;
     }
 }
