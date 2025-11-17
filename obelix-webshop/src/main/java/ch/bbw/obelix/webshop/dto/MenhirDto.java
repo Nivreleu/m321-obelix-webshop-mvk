@@ -1,4 +1,4 @@
-package ch.bbw.obelix.quarry.api;
+package ch.bbw.obelix.webshop.dto;
 
 import java.util.UUID;
 

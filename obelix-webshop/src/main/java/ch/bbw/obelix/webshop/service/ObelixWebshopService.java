@@ -10,7 +10,7 @@ import jakarta.transaction.Transactional;
 
 import ch.bbw.obelix.webshop.controller.ObelixWebshopController;
 import ch.bbw.obelix.webshop.dto.BasketDto;
-import ch.bbw.obelix.quarry.api.DecorativenessDto;
+import ch.bbw.obelix.webshop.dto.DecorativenessDto;
 import ch.bbw.obelix.webshop.entity.MenhirEntity;
 import ch.bbw.obelix.webshop.repository.MenhirRepository;
 import lombok.NonNull;
@@ -52,6 +52,29 @@ public class ObelixWebshopService {
 	@PostConstruct
 	public void leave() {
 		basket = BasketDto.empty();
+	}
+
+	public boolean isGoodOffer(DecorativenessDto decorativeness) {
+		var stoneWorth = decorativeness.ordinal();
+		var basketWorth = basket.items()
+				.stream().map(x -> switch (x.name().toLowerCase(Locale.ROOT)) {
+					case "boar" -> 5; // oh boy, oh boy!
+					case "honey" -> 2;
+					case "magic potion" -> 0; // not allowed to drink this!
+					default -> 1; // everything is worth something
+				} * x.count()).reduce(0, Integer::sum);
+		log.info("basket worth {} vs menhir worth {} ({})", basketWorth, decorativeness, stoneWorth);
+		return basketWorth >= stoneWorth;
+	}
+
+	public void exchange(UUID menhirId) {
+		var menhir = quarryWebclient.getMenhirById(menhirId);
+		var decorativeness = menhir.decorativeness();
+		if (!isGoodOffer(decorativeness)) {
+			throw new BadOfferException("Bad Offer: That won't even feed Idefix!");
+		}
+		quarryWebclient.deleteById(menhirId);
+		leave();
 	}
 
 	@PostConstruct
