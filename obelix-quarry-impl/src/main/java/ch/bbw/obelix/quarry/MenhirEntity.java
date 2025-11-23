@@ -1,4 +1,4 @@
-package ch.bbw.obelix.webshop.entity;
+package ch.bbw.obelix.quarry;
 
 import java.util.UUID;
 import jakarta.persistence.Column;

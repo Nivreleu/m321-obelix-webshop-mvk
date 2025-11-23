@@ -1,5 +1,6 @@
 package ch.bbw.obelix.webshop.service;
 
+import ch.bbw.obelix.quarry.api.QuarryApi;
 import ch.bbw.obelix.quarry.api.dto.MenhirDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -10,10 +11,11 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class QuarryWebclientService {
+public class QuarryWebclientService implements QuarryApi {
 
     private final WebClient quarryWebClient;
 
+    @Override
     public List<MenhirDto> getAllMenhirs() {
         return quarryWebClient.get()
                 .uri("/api/menhirs")
@@ -23,6 +25,7 @@ public class QuarryWebclientService {
                 .block();
     }
 
+    @Override
     public MenhirDto getMenhirById(UUID menhirId) {
         return quarryWebClient.get()
                 .uri("/api/menhirs/{id}", menhirId)
@@ -31,6 +34,7 @@ public class QuarryWebclientService {
                 .block();
     }
 
+    @Override
     public void deleteById(UUID menhirId) {
         quarryWebClient.delete()
                 .uri("/api/quarry/{id}", menhirId)

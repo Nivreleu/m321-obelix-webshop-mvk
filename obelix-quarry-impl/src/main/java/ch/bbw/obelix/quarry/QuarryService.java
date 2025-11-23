@@ -1,4 +1,4 @@
-package ch.bbw.obelix.webshop.service;
+package ch.bbw.obelix.quarry;
 
 import ch.bbw.obelix.webshop.controller.ObelixWebshopController;
 import ch.bbw.obelix.quarry.api.dto.MenhirDto;

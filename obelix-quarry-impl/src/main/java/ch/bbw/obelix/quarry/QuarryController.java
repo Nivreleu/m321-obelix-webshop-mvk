@@ -1,6 +1,5 @@
-package ch.bbw.obelix.webshop.controller;
+package ch.bbw.obelix.quarry;
 
-import ch.bbw.obelix.quarry.api.QuarryApi;
 import ch.bbw.obelix.quarry.api.dto.MenhirDto;
 import ch.bbw.obelix.webshop.service.QuarryService;
 import lombok.RequiredArgsConstructor;
