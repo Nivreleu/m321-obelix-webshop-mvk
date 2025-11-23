@@ -1,16 +1,18 @@
 plugins {
-	id 'java-library'
-	id 'org.springframework.boot'
+    id 'java-library'
+    id 'org.springframework.boot'
+    id 'io.spring.dependency-management'
 }
 
 dependencies {
-	implementation project(':obelix-common')
-	implementation project(':obelix-quarry-api')
-	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation project(':obelix-common')
+    implementation project(':obelix-quarry-api')
+    implementation 'org.springframework.boot:spring-boot-starter-web'   // WICHTIG
+    implementation 'org.springframework.boot:spring-boot-starter-webflux' // optional
 
-	testImplementation testFixtures(project(':obelix-common'))
+    testImplementation testFixtures(project(':obelix-common'))
 }
 
 tasks.named("bootBuildImage") {
-	imageName = "bbw/obelix-webshop:latest"
+    imageName = "bbw/obelix-webshop:latest"
 }

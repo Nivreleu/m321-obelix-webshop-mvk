@@ -1,18 +1,13 @@
 package ch.bbw.obelix.webshop.service;
 
-import ch.bbw.obelix.webshop.controller.ObelixWebshopController;
-import ch.bbw.obelix.webshop.controller.QuarryController;
 import ch.bbw.obelix.webshop.dto.BasketDto;
-import ch.bbw.obelix.webshop.dto.DecorativenessDto;
-import ch.bbw.obelix.webshop.entity.MenhirEntity;
-import ch.bbw.obelix.webshop.repository.MenhirRepository;
+import ch.bbw.obelix.quarry.api.dto.DecorativenessDto;
 import jakarta.annotation.PostConstruct;
 import jakarta.transaction.Transactional;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.StandardException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -24,8 +19,8 @@ import java.util.*;
 @Transactional
 @RequiredArgsConstructor
 public class BasketService {
-    @Lazy
-    private final QuarryService quarryService;
+
+    private final QuarryWebclientService quarryClient;
 
     private BasketDto basket;
 
@@ -59,12 +54,12 @@ public class BasketService {
     }
 
     public void exchange(UUID menhirId) {
-        var menhir = quarryService.getMenhirById(menhirId);
+        var menhir = quarryClient.getMenhirById(menhirId);
         var decorativeness = menhir.decorativeness();
         if (!isGoodOffer(decorativeness)) {
             throw new BadOfferException("Bad Offer: That won't even feed Idefix!");
         }
-        quarryService.deleteById(menhirId);
+        quarryClient.deleteById(menhirId);
         leave();
     }
 

@@ -1,7 +1,7 @@
 package ch.bbw.obelix.webshop.service;
 
 import ch.bbw.obelix.webshop.controller.ObelixWebshopController;
-import ch.bbw.obelix.webshop.dto.MenhirDto;
+import ch.bbw.obelix.quarry.api.dto.MenhirDto;
 import ch.bbw.obelix.webshop.entity.MenhirEntity;
 import ch.bbw.obelix.webshop.repository.MenhirRepository;
 import jakarta.annotation.PostConstruct;
