@@ -1,8 +1,7 @@
-﻿package ch.bbw.obelix.webshop.controller;
+package ch.bbw.obelix.webshop.controller;
 
 import ch.bbw.obelix.webshop.dto.BasketDto;
 import ch.bbw.obelix.webshop.service.BasketService;
-import ch.bbw.obelix.webshop.service.ObelixWebshopService;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.StandardException;
 import org.springframework.http.HttpStatus;
@@ -35,7 +34,7 @@ public class BasketController {
      * Decide if the current basket is worthy enough for a beautiful menhir.
      *
      * @param menhirId the menhir to buy
-     * @throws ObelixWebshopService.BadOfferException in case the basket is tiny
+     * @throws BasketService.BadOfferException in case the basket is tiny
      */
     @PostMapping("/api/basket/buy/{menhirId}")
     public void exchangeFor(@PathVariable UUID menhirId) {

@@ -1,4 +1,4 @@
-﻿package ch.bbw.obelix.webshop.service;
+package ch.bbw.obelix.webshop.service;
 
 import ch.bbw.obelix.webshop.controller.ObelixWebshopController;
 import ch.bbw.obelix.webshop.controller.QuarryController;
@@ -25,7 +25,7 @@ import java.util.*;
 @RequiredArgsConstructor
 public class BasketService {
     @Lazy
-    private final QuarryController quarryWebclient;
+    private final QuarryService quarryService;
 
     private BasketDto basket;
 
@@ -59,12 +59,17 @@ public class BasketService {
     }
 
     public void exchange(UUID menhirId) {
-        var menhir = quarryWebclient.getMenhirById(menhirId);
+        var menhir = quarryService.getMenhirById(menhirId);
         var decorativeness = menhir.decorativeness();
         if (!isGoodOffer(decorativeness)) {
-            throw new ObelixWebshopService.BadOfferException("Bad Offer: That won't even feed Idefix!");
+            throw new BadOfferException("Bad Offer: That won't even feed Idefix!");
         }
-        quarryWebclient.deleteById(menhirId);
+        quarryService.deleteById(menhirId);
         leave();
     }
+
+
+    @StandardException
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public static class BadOfferException extends RuntimeException {}
 }
