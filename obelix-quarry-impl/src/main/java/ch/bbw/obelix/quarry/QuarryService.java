@@ -1,24 +1,26 @@
 package ch.bbw.obelix.quarry;
 
-import ch.bbw.obelix.webshop.controller.ObelixWebshopController;
 import ch.bbw.obelix.quarry.api.dto.MenhirDto;
-import ch.bbw.obelix.webshop.entity.MenhirEntity;
-import ch.bbw.obelix.webshop.repository.MenhirRepository;
 import jakarta.annotation.PostConstruct;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
 
+@Slf4j
 @Service
 @Transactional
 @RequiredArgsConstructor
 public class QuarryService {
 
+    @Lazy
     private final MenhirRepository menhirRepository;
 
+    /*
     public List<MenhirDto> getAllMenhirs() {
         return menhirRepository.findAll()
                 .stream()
@@ -36,8 +38,7 @@ public class QuarryService {
     public void deleteById(UUID menhirId) {
         menhirRepository.deleteById(menhirId);
     }
-
-    // --- Initial-Daten (aus ObelixWebshopService kopieren) ---
+*/
 
     @PostConstruct
     public void initializeMenhirs() {

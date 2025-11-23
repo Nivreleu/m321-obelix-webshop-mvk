@@ -6,7 +6,6 @@ import org.springframework.web.service.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
-@HttpExchange("/api")
 public interface QuarryApi {
 
     @GetExchange("/menhirs")

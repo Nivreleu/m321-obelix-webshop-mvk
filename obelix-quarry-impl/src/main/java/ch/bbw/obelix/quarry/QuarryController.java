@@ -1,8 +1,10 @@
 package ch.bbw.obelix.quarry;
 
+import ch.bbw.obelix.quarry.api.QuarryApi;
 import ch.bbw.obelix.quarry.api.dto.MenhirDto;
-import ch.bbw.obelix.webshop.service.QuarryService;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.StandardException;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,22 +12,29 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
-public class QuarryController {
+public class QuarryController implements QuarryApi {
 
-    private final QuarryService quarryService;
+    private final MenhirRepository menhirRepository;
 
-    @GetMapping("/api/menhirs")
+    @Override
     public List<MenhirDto> getAllMenhirs() {
-        return quarryService.getAllMenhirs();
+        return menhirRepository.findAll()
+                .stream().map(MenhirEntity::toDto).toList();
     }
 
-    @GetMapping("/api/menhirs/{menhirId}")
+    @Override
     public MenhirDto getMenhirById(UUID menhirId) {
-        return quarryService.getMenhirById(menhirId);
+        return menhirRepository.findById(menhirId)
+                .map(MenhirEntity::toDto)
+                .orElseThrow(() -> new UnknownMenhirException("unknown menhir with id " + menhirId));
     }
 
-    @DeleteMapping("/api/quarry/{menhirId}")
+    @Override
     public void deleteById(UUID menhirId) {
-        quarryService.deleteById(menhirId);
+        menhirRepository.deleteById(menhirId);
     }
+
+    @StandardException
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public static class UnknownMenhirException extends RuntimeException {}
 }
