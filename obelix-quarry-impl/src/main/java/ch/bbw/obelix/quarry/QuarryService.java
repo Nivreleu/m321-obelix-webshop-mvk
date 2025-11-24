@@ -1,15 +1,11 @@
 package ch.bbw.obelix.quarry;
 
-import ch.bbw.obelix.quarry.api.dto.MenhirDto;
 import jakarta.annotation.PostConstruct;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.UUID;
 
 @Slf4j
 @Service
@@ -19,26 +15,6 @@ public class QuarryService {
 
     @Lazy
     private final MenhirRepository menhirRepository;
-
-    /*
-    public List<MenhirDto> getAllMenhirs() {
-        return menhirRepository.findAll()
-                .stream()
-                .map(MenhirEntity::toDto)
-                .toList();
-    }
-
-    public MenhirDto getMenhirById(UUID menhirId) {
-        return menhirRepository.findById(menhirId)
-                .map(MenhirEntity::toDto)
-                .orElseThrow(() -> new ObelixWebshopController.UnknownMenhirException(
-                        "unknown menhir with id " + menhirId));
-    }
-
-    public void deleteById(UUID menhirId) {
-        menhirRepository.deleteById(menhirId);
-    }
-*/
 
     @PostConstruct
     public void initializeMenhirs() {
