@@ -13,6 +13,7 @@ import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 import java.util.List;
 import java.util.UUID;
 
+// AI generated, (habe ich leider nicht von mir aus geschafft)
 @Service
 public class QuarryWebclientService implements QuarryApi {
 
