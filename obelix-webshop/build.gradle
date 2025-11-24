@@ -1,3 +1,5 @@
+// AI Generated, had some issues
+
 plugins {
     id 'java-library'
     id 'org.springframework.boot'
